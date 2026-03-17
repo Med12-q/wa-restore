@@ -53,9 +53,10 @@ button:hover{background:linear-gradient(90deg,#00ff9c,#00d4ff);}
   
   <button onclick="login()">Se connecter</button>
   <br>
-  <a href="https://wa.me/+224669288332" target="_blank">
+  
+  <!-- Bouton contact développeur cliquable -->
+  <button onclick="window.open('https://wa.me/+224669288332', '_blank')">
 📩 Contactez le développeur
-  </a>
   </button>
 </div>
 
@@ -137,11 +138,6 @@ function login(){
     alert("Connexion réussie ! Bienvenue " + val);
 }
 
-// Contact développeur
-function contactDev(){
-    window.open("https://wa.me/+224669288332","_blank");
-}
-
 // Générateur message
 let m="";
 function gen(){
@@ -207,4 +203,4 @@ scrollLinks();
 </script>
 
 </body>
-</html>
+  </html>
