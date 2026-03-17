@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>𝐖𝐀 𝐑𝐄𝐒𝐓𝐎𝐑𝐄 𝐏𝐑𝐎</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600&family=Rajdhani:wght@500&display=swap');
+
+/* Général */
+body { margin:0; font-family:'Rajdhani',sans-serif; background:#010101; color:#d9ffe9; }
+header { text-align:center; padding:30px; background:linear-gradient(180deg,#001f11,#003344); border-bottom:1px solid #00ff9c33; }
+h1{color:#00ff9c; letter-spacing:3px; font-family:'Orbitron',sans-serif;}
+h2{color:#00ff9c; margin-top:15px;}
+.container{max-width:900px;margin:auto;padding:20px;}
+.card{background:linear-gradient(145deg,#001f11,#003344); border:2px solid #00ff9c22; border-radius:15px; padding:20px; margin-top:20px; box-shadow:0 0 20px #00ff9c33;}
+input, select{width:100%; padding:12px; margin-top:10px; background:#010101; border:1px solid #00ff9c55; color:#00ff9c; border-radius:12px; font-size:16px;}
+button{width:100%; padding:12px; margin-top:12px; background:linear-gradient(90deg,#00d4ff,#00ff9c); border:none; color:#000; font-weight:bold; border-radius:12px; cursor:pointer; font-size:16px;}
+button:hover{background:linear-gradient(90deg,#00ff9c,#00d4ff);}
+.row{display:flex; gap:10px; flex-wrap:wrap; margin-top:10px;}
+.output, .history, .status{margin-top:15px; padding:15px; background:#010101; border:1px solid #00ff9c55; border-radius:12px; font-size:15px;}
+.chatbot{height:150px; overflow-y:auto; background:#000; padding:10px; border-radius:12px; border:1px solid #00ff9c33; font-size:14px;}
+.footer{margin-top:30px; padding:15px; border-top:1px solid #00ff9c22; text-align:center; font-size:14px;}
+.guide {margin-top:20px;}
+#scrollText{height:200px; overflow:hidden; position:relative; border:1px solid #00ff9c55; background:#010101; padding:10px; border-radius:12px;}
+#credits{position:absolute; bottom:-100%; width:100%; text-align:center; line-height:1.8;}
+#socialContainer{overflow:hidden; white-space:nowrap; border-top:1px solid #00ff9c22; padding-top:10px; margin-top:10px;}
+#socialLinks{display:inline-flex; align-items:center;}
+#socialLinks a{color:#00ff9c; text-decoration:none; margin-right:30px; display:flex; align-items:center; gap:5px;}
+#socialLinks img{width:30px; height:30px; border-radius:50%;}
+
+/* Logo WhatsApp inscription */
+#whLogo{width:80px; height:80px; display:block; margin:auto; margin-bottom:20px; border-radius:12px; background:#00ff9c11; padding:10px; box-shadow:0 0 15px #00ff9c88;}
+</style>
+</head>
+<body>
+
+<header>
+<h1>𝐖𝐀 𝐑𝐄𝐒𝐓𝐎𝐑𝐄 𝐏𝐑𝐎</h1>
+<p>ʀᴇ́ᴄᴜᴘᴇ́ʀᴀᴛɪᴏɴ ʟᴇ́ɢᴀʟ ᴅᴜ ᴄᴏᴍᴘᴛᴇ ᴡʜᴀᴛsᴀᴘᴘ</p>
+</header>
+
+<div class="container">
+
+<!-- Page Login / Inscription -->
+<div id="login" class="card">
+  <!-- Logo WhatsApp officiel réduit -->
+  <img id="whLogo" src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="Logo WhatsApp">
+
+  <h2 style="text-align:center; color:#00d4ff; font-family:'Orbitron',sans-serif; margin-bottom:20px;">🔑 Connexion / Inscription</h2>
+
+  <input id="userInput" placeholder="Numéro WhatsApp ou Email">
+  
+  <button onclick="login()">Se connecter</button>
+  <br>
+  <button onclick="contactDev()">📩 Contacter le développeur</button>
+</div>
+
+<!-- Page principale après login -->
+<div id="main" style="display:none;">
+
+<div class="card">
+<h2>🔧 Générateur de message</h2>
+<input id="num" placeholder="+224...">
+<select id="type">
+<option value="banni">Banni</option>
+<option value="bloque">Bloqué</option>
+<option value="suspendu">Suspendu</option>
+</select>
+<button onclick="gen()">Générer message</button>
+<div id="out" class="output"></div>
+<div class="row">
+<button onclick="copy()">📋 Copier</button>
+<button onclick="send()">🚀 Envoyer</button>
+<button onclick="download()">📄 Télécharger</button>
+</div>
+</div>
+
+<div class="card">
+<h2>📊 Suivi du statut</h2>
+<div id="status" class="status">⏳ En attente...</div>
+<button onclick="track()">Actualiser</button>
+</div>
+
+<div class="card">
+<h2>📜 Historique des messages</h2>
+<div id="history" class="history"></div>
+<button onclick="saveHistory()">Ajouter à l'historique</button>
+</div>
+
+<div class="card">
+<h2>🤖 Assistant IA</h2>
+<input id="q" placeholder="Ex: pourquoi mon compte est banni ?">
+<button onclick="bot()">Envoyer</button>
+<div id="chat" class="chatbot"></div>
+</div>
+
+<div class="card guide">
+<h2>🎬 Guide & Crédits</h2>
+<div id="scrollText">
+<div id="credits">
+<p>ᴍᴇʀᴄɪ ᴅ'ᴜᴛɪʟɪsᴇʀ 𝐖𝐀 𝐑𝐄𝐒𝐓𝐎𝐑𝐄 𝐏𝐑𝐎</p>
+<p>sᴜɪᴠᴇᴢ ʟᴇs ᴇ́ᴛᴀᴘᴇs ᴘᴏᴜʀ ʀᴇ́ᴄᴜᴘᴇ́ʀᴇʀ ᴠᴏᴛʀᴇ ᴄᴏᴍᴘᴛᴇ ᴡʜᴀᴛsᴀᴘᴘ</p>
+<p>𝐂𝐎𝐍𝐒𝐄𝐈𝐋 : ɴᴇ ᴘᴀʀᴛᴀɢᴇᴢ ᴊᴀᴍᴀɪs ᴠᴏs ɪɴғᴏʀᴍᴀᴛɪᴏɴs ᴘᴇʀsᴏɴɴᴇʟʟᴇs</p>
+<p>ᴄᴏɴᴛᴀᴄᴛᴇᴢ ʟᴇ sᴜᴘᴘᴏʀᴛ ᴏғғɪᴄɪᴇʟ ᴡʜᴀᴛsᴀᴘᴘ ᴘᴏᴜʀ ᴛᴏᴜᴛᴇ ᴀssɪsᴛᴀɴᴄᴇ</p>
+<p>ʟᴇᴀᴅᴇʀ ᴅᴇᴠᴇʟᴏᴘᴘᴇᴜʀ ✦ VARN0X Or NOVARK ✦ © copyright 2026-2027</p>
+</div>
+</div>
+
+<div id="socialContainer">
+<div id="socialLinks">
+<a href="https://wa.me/+224669288332" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">WhatsApp</a>
+<a href="https://instagram.com" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram">Instagram</a>
+<a href="https://t.me" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" alt="Telegram">Telegram</a>
+<a href="https://tiktok.com" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/en/a/a9/TikTok_logo.svg" alt="TikTok">TikTok</a>
+</div>
+</div>
+</div>
+
+</div>
+
+<div class="footer">
+<p>✦ VARN0X Or NOVARK ✦ © copyright 2026-2027</p>
+</div>
+
+<script>
+// Login
+function login(){
+    let val = document.getElementById("userInput").value.trim();
+    if(val.length<5){ alert("Entrez un numéro ou email valide"); return; }
+    localStorage.setItem("user", val);
+    document.getElementById("login").style.display="none";
+    document.getElementById("main").style.display="block";
+    alert("Connexion réussie ! Bienvenue " + val);
+}
+
+// Contact développeur
+function contactDev(){
+    window.open("https://wa.me/+224669288332","_blank");
+}
+
+// Générateur message
+let m="";
+function gen(){
+    let n=document.getElementById("num").value;
+    let t=document.getElementById("type").value;
+    if(!n.startsWith("+")){ alert("Numéro invalide"); return; }
+    if(t=="banni") m="Bonjour, mon numéro "+n+" a été banni par erreur. Merci de vérifier.";
+    if(t=="bloque") m="Bonjour, mon numéro "+n+" est bloqué. Merci de m'aider.";
+    if(t=="suspendu") m="Bonjour, mon compte "+n+" est suspendu. Je souhaite le récupérer.";
+    document.getElementById("out").innerText=m;
+}
+
+// Copier / Envoyer / Télécharger
+function copy(){ navigator.clipboard.writeText(m); alert("Copié !"); }
+function send(){ window.open("https://wa.me/?text="+encodeURIComponent(m)); }
+function download(){ let a=document.createElement("a"); a.href=URL.createObjectURL(new Blob([m],{type:"text/plain"})); a.download="message.txt"; a.click(); }
+
+// Historique
+function saveHistory(){ 
+    if(m=="") return; 
+    let h = document.getElementById("history"); 
+    h.innerHTML += "<p>"+m+"</p>"; 
+}
+
+// Suivi statut
+function track(){ 
+    let s=["⏳ En attente","📨 Envoyé","📩 Réponse","✅ Résolu"]; 
+    document.getElementById("status").innerText = s[Math.floor(Math.random()*s.length)];
+}
+
+// Chatbot simple
+function bot(){ 
+    let q=document.getElementById("q").value.toLowerCase(); 
+    let chat=document.getElementById("chat"); 
+    let r="Je ne comprends pas.";
+    if(q.includes("banni")) r="Votre compte peut être banni pour spam ou violation."; 
+    if(q.includes("recuperer")) r="Utilisez le générateur et contactez le support."; 
+    if(q.includes("temps")) r="Le traitement prend 24 à 72 heures."; 
+    chat.innerHTML+="<p>👤 "+q+"</p><p>🤖 "+r+"</p>"; 
+}
+
+// Texte défilant style “credits”
+let credits = document.getElementById("credits");
+let pos = -100;
+function scrollCredits(){
+  pos += 0.5;
+  if(pos > 200) pos = -credits.offsetHeight;
+  credits.style.bottom = pos + "px";
+  requestAnimationFrame(scrollCredits);
+}
+scrollCredits();
+
+// Liens sociaux qui défilent horizontalement
+let links = document.getElementById("socialLinks");
+let linkPos = 0;
+function scrollLinks(){
+  linkPos -= 1;
+  if(Math.abs(linkPos) > links.scrollWidth/2) linkPos = 0;
+  links.style.transform = "translateX("+linkPos+"px)";
+  requestAnimationFrame(scrollLinks);
+}
+scrollLinks();
+</script>
+
+</body>
+</html>
